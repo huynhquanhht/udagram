@@ -23,7 +23,7 @@ script:
   - docker tag udagram-reverseproxy huynhquanhht/udagram-reverseproxy:v1
   - docker tag udagram-api-feed huynhquanhht/udagram-api-feed:v1
   - docker tag udagram-api-user huynhquanhht/udagram-api-user:v1
-  - docker tag udagram-frontend huynhquanhht/udagram-frontend:v1
+  - docker tag udagram-frontend huynhquanhht/udagram-frontend:v1.6
 
 # Task to execute after the build process is successful
 after_success:
