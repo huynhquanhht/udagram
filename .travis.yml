@@ -31,4 +31,4 @@ after_success:
   - docker push huynhquanhht/udagram-reverseproxy:v1
   - docker push huynhquanhht/udagram-api-feed:v1
   - docker push huynhquanhht/udagram-api-user:v1
-  - docker push huynhquanhht/udagram-frontend:v1.3
+  - docker push huynhquanhht/udagram-frontend:v1.6
