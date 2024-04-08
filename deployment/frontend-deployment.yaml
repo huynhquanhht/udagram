@@ -27,3 +27,8 @@ spec:
                 name: aws-secret
           ports:
             - containerPort: 80
+          volumeMounts:
+            - name: aws-secret
+              mountPath: "/root/.aws/"
+              readOnly: true
+          restartPolicy: Always
