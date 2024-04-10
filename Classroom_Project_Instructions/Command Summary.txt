@@ -1,0 +1,87 @@
+Command:
+- Config aws credential
+$ aws configure
+$ aws --version
+Verify connection
+$ psql -h <host_url> -U <username> postgres
+
+- Prevent file from being tracked in git
+# Stop git
+$ git rm --cached set_env.sh
+# Prevent git from tracking the set_env.sh
+$ echo *set_env.sh >> .gitignore
+
+- Set the configuration values as environment variables
+$ source set_env.sh
+- Verify that environment variables were set by testing one of the expected values
+$ echo $POSTGRES_USERNAME
+
+- Remove unused and dangling images
+$ docker image prune --all
+- Build docker parallel
+$ docker-compose -f docker-compose-build.yaml build --parallel
+$ docker-compose -f docker-compose-build.yaml build --parallel --no-cache
+- Run docker with file
+$ docker-compose up
+- Build docker
+$ docker build -t udagram-api-feed ./udagram-api-feed
+- Tagging
+$ docker tag udagram-api-feed sudkul/udagram-api-feed:v1
+- Assuming DOCKER_PASSWORD and DOCKER_USERNAME are set in the Travis repository settings
+$ echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+$ docker push sudkul/udagram-api-feed:v1
+- See the list of current images
+# Use the following syntax
+# In the remote registry (Dockerhub), we can have multiple versions of an image using "tags". 
+# docker tag <local-image-name:current-tag> <registry-name>/<repository-name>:<new-tag>
+docker tag <local-image:tag> <dockerhub-username>/<repository>:<tag>
+- Push the images to the Dockerhub
+$ docker login --username=<your-username>
+- Create EKS in AWS
+$ eksctl create cluster --name myCluster --region=us-east-1,us-east-2 --nodes-min=2 --node-max=3
+- Confirm create eks success
+$ kubectl get nodes
+- Convert credentials file to base64
+https://www.base64encode.org/
+- Apply env variables and secrets
+$ kubectl apply -f aws-secret.yaml
+$ kubectl apply -f env-secret.yaml
+$ kubectl apply -f env-configmap.yaml
+- Deployments - Double check the Dockerhub image name and version in the deployment files
+$ kubectl apply -f backend-feed-deployment.yaml
+$ kubectl apply -f backend-feed-service.yaml
+- Service
+$ kubectl apply -f backend-feed-service.yaml
+- Check the deployment names and their pod status
+$ kubectl get deployments
+- Create a Service object that exposes the frontend deployment
+$ kubectl expose deployment frontend --type=LoadBalancer --name=publicfrontend
+- Repeat the process for the *reverseproxy* deployment
+# Check name, ClusterIP, and External IP of all deployments
+$ kubectl get services
+$ kubectl get pods # It should show the STATUS as Running
+- Tag
+$ docker build . -t <Dockerhub-username>/udagram-frontend:v6
+$ docker push <Dockerhub-username>/udagram-frontend:v6
+- Rolling update the containers of "frontend" deployment
+$ kubectl set image deployment frontend frontend=<Dockerhub-username>/udagram-frontend:v6
+- Get pods
+$ kubectl get pods
+$ kubectl logs <pod-name> -p
+- Once you increase the memory, check the updated deployment as:
+$ kubectl get pod <pod-name> --output=yaml
+- You can autoscale, if required, as
+$ kubectl autoscale deployment backend-user --cpu-percent=70 --min=3 --max=5
+- Describe services
+$ kubectl describe services
+- Show horizontal scaling set against CPU usage
+$ kubectl describe hpa
+
+
+
+
+
+
+
+
+
